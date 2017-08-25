@@ -42,9 +42,9 @@ namespace MyService
         {
             using(var db = new DataBaseContext())
             {
-                var query = from user in db.Users
+                List<User> query = (from user in db.Users
                             
-                            select user;
+                            select user).Take(50).ToList();
 
                 return query.ToList();
             }
