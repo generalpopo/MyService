@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -14,7 +15,16 @@ namespace MyService
     {
         public string GetData(int value)
         {
-            return string.Format("You entered: {0}", value);
+
+            DataClasses1DataContext ctx = new DataClasses1DataContext();
+            var query = from t in ctx.Tables
+                        select t;
+            int count = 0;
+            foreach(var q in query)
+            {
+                count++;
+            }
+            return count.ToString();
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
