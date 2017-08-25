@@ -46,7 +46,7 @@ namespace MyService
                             
                             select user).Take(50).ToList();
 
-                return query.ToList();
+                return query;
             }
         }
 
