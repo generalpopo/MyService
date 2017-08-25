@@ -17,6 +17,9 @@ namespace MyService
         string GetData(int value);
 
         [OperationContract]
+        ICollection<User> GetUsers();
+
+        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here

@@ -15,8 +15,39 @@ namespace MyService
     {
         public string GetData(int value)
         {
-            return "";
+            using(var db = new DataBaseContext())
+            {
+                int counter = 0;
+                int sCounter = 100;
+                for(int i = 0; i < 300; i++)
+                {
+                    counter++;
+                    var user = new User { Username = Faker.NameFaker.Name(), Password = "Loco", EmailAddress = Faker.InternetFaker.Email() };
+                    db.Users.Add(user);
+
+                    if (counter == sCounter)
+                    {
+                        db.SaveChanges();
+                        sCounter += 100;
+                    }
+                }
+                db.SaveChanges();
+
+            }
+            return "Done";
            
+        }
+
+        public ICollection<User> GetUsers()
+        {
+            using(var db = new DataBaseContext())
+            {
+                var query = from user in db.Users
+                            
+                            select user;
+
+                return query.ToList();
+            }
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
