@@ -15,16 +15,8 @@ namespace MyService
     {
         public string GetData(int value)
         {
-
-            DataClasses1DataContext ctx = new DataClasses1DataContext();
-            var query = from t in ctx.Tables
-                        select t;
-            int count = 0;
-            foreach(var q in query)
-            {
-                count++;
-            }
-            return count.ToString();
+            return "";
+           
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
