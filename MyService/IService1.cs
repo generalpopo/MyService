@@ -17,7 +17,13 @@ namespace MyService
         string GetData(int value);
 
         [OperationContract]
-        ICollection<User> GetUsers();
+        List<User> GetUsers();
+
+        [OperationContract]
+        int Register();
+
+        [OperationContract]
+        User GetUser(int Id);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

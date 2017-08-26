@@ -19,7 +19,7 @@ namespace MyService
             {
                 int counter = 0;
                 int sCounter = 100;
-                for(int i = 0; i < 300; i++)
+                for(int i = 0; i < 500; i++)
                 {
                     counter++;
                     var user = new User { Username = Faker.NameFaker.Name(), Password = "Loco", EmailAddress = Faker.InternetFaker.Email() };
@@ -38,16 +38,46 @@ namespace MyService
            
         }
 
-        public ICollection<User> GetUsers()
+        public int Register()
         {
             using(var db = new DataBaseContext())
             {
-                List<User> query = (from user in db.Users
-                            
-                            select user).Take(50).ToList();
-
-                return query;
+                var user = new User { Username = Faker.NameFaker.Name(), Password = "Loco", EmailAddress = Faker.InternetFaker.Email() };
+                db.Users.Add(user);
+                db.SaveChanges();
+                return user.UserId;
             }
+
+           
+        }
+
+        public User GetUser(int Id)
+        {
+
+           User query = null;
+            using (var db = new DataBaseContext())
+            {
+                db.Configuration.ProxyCreationEnabled = false;//allows virtual properties in entity framework models
+                var u = db.Users.Where(s => s.UserId == Id);
+                query = u.FirstOrDefault<User>();
+            }
+            return query;
+        }
+
+        public List<User> GetUsers()
+        {
+            List<User> query = null;
+            using (var db = new DataBaseContext())
+            {
+                db.Configuration.ProxyCreationEnabled = false;//allows virtual properties in entity framework models
+                query = db.Users.ToList<User>();
+    
+            }
+           
+        return query;
+           
+           
+
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
