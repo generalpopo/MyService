@@ -19,7 +19,7 @@ namespace MyService
             {
                 int counter = 0;
                 int sCounter = 100;
-                for(int i = 0; i < 500; i++)
+                for(int i = 0; i < 5000; i++)
                 {
                     counter++;
                     var user = new User { Username = Faker.NameFaker.Name(), Password = "Loco", EmailAddress = Faker.InternetFaker.Email() };
